@@ -28,12 +28,16 @@ namespace SSB
         static int lastmessageno = 0;
         static void Main(string[] args)
         {
+            Console.WriteLine("Steam-Stack Chat Bridge launched.");
             if (File.Exists("config.ini"))
             {
+                Console.WriteLine("config.ini found.");
                 configfile = File.ReadAllLines("config.ini").ToList();
                 if (configfile.Count() >= 6)
                 {
+                    Console.WriteLine("config.ini has enough lines, logging in to stack with mail " + configfile[0]);
                     var client = new Client(configfile[0], configfile[1]);
+                    Console.WriteLine("Logged in. Joining room " + configfile[5]);
                     sandbox = client.JoinRoom(configfile[5]);
 
                     sandbox.EventManager.ConnectListener(EventType.InternalException, new Action<Exception>(ex => Console.WriteLine("[ERROR] " + ex)));
