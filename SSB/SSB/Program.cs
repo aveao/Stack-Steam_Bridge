@@ -79,7 +79,7 @@ namespace SSB
             {
                 if (callback.Message.StartsWith("!!"))
                 {
-                    var command = callback.Message.Substring(0, callback.Message.IndexOf(" "));
+                    var command = (callback.Message.Contains(" ")) ? callback.Message.Substring(0, callback.Message.IndexOf(" ")) : callback.Message;
                     switch (command)
                     {
                         case "!!starlast":
